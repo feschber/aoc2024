@@ -3,10 +3,6 @@ module Main where
 import Data.List
 import Data.Maybe
 
--- takes l1 and l2 and truncates l2 to the length of l1
-truncateTo :: [a] -> [b] -> [b]
-truncateTo = zipWith (\_ x -> x)
-
 takeMaybe :: Int -> [a] -> Maybe [a]
 takeMaybe 0 _ = Just []
 takeMaybe _ [] = Nothing
