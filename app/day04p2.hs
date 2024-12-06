@@ -1,22 +1,44 @@
 module Main where
 
 import Data.List
+import Data.Maybe
 
-twice f = f . f
+-- takes l1 and l2 and truncates l2 to the length of l1
+truncateTo :: [a] -> [b] -> [b]
+truncateTo = zipWith (\_ x -> x)
 
-rotate90 = reverse . transpose
+takeMaybe :: Int -> [a] -> Maybe [a]
+takeMaybe 0 _ = Just []
+takeMaybe _ [] = Nothing
+takeMaybe n (x : xs) = (x :) <$> takeMaybe (n - 1) xs
 
-rotate180 = twice rotate90
+slidingWindow :: Int -> [a] -> [[a]]
+slidingWindow n = mapMaybe (takeMaybe n) . tails
 
-take_n n s l = take n (drop s l)
+-- sliding window over multiple lists at once
+slideParallel :: Int -> [[a]] -> [[[a]]]
+slideParallel m = map transpose . slidingWindow m . transpose
 
-sliding_window n l = take (length l - n + 1) (zipWith (take_n n) [0 ..] (repeat l))
+slidingWindow2D :: Int -> Int -> [[a]] -> [[[a]]]
+slidingWindow2D n m = concatMap (slideParallel m) . slidingWindow n
 
-sl3 = sliding_window 3
+rotate :: Int -> [[a]] -> [[a]]
+rotate 0 = id
+rotate n = rotate (n - 1) . (reverse . transpose)
 
-sw2d3 = (map sl3) . sl3
+diagonal :: [[a]] -> [a]
+diagonal = head . transpose . zipWith drop [0 ..]
 
+allDiagonals :: [[a]] -> [[a]]
+allDiagonals m = map (diagonal . (`rotate` m)) [0 .. 3]
+
+matchXmas :: [String] -> Bool
+matchXmas m = length ((filter (== "MAS") . allDiagonals) m) == 2
+
+main :: IO ()
 main = do
   i <- getContents
   let l = lines i
-  print (sw2d3 l)
+  let windows = slidingWindow2D 3 3 l
+  let matches = (length . filter id . map matchXmas) windows
+  print matches
