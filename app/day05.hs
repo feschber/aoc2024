@@ -30,7 +30,7 @@ parse s =
 
 ruleApplies :: (Int, Int) -> [Int] -> Bool
 ruleApplies _ [] = True
-ruleApplies r@(a, b) (x : xs) = if a == x then True else if b == x then not (elem a xs) else ruleApplies r xs
+ruleApplies r@(a, b) (x : xs) = if a == x then True else if b == x then not (a `elem` xs) else ruleApplies r xs
 
 isConform :: [(Int, Int)] -> [Int] -> Bool
 isConform r u = all ((flip ruleApplies) u) r
