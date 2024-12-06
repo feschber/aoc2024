@@ -1,0 +1,69 @@
+cabal-version:      3.0
+name:               aoc2024
+version:            0.1.0.0
+synopsis:           Advent of Code 2024 done in Haskell
+description:        Advent of Code 2024 (https://adventofcode.com/2024) done in Haskell
+license:            BSD-3-Clause
+license-file:       LICENSE
+author:             Ferdinand Schober
+maintainer:         ferdinandschober20@gmail.com
+build-type:         Simple
+extra-doc-files:    CHANGELOG.md
+common warnings
+    ghc-options: -Wall
+
+executable day1
+    import:           warnings
+    main-is:          day01.hs
+    build-depends:    base ^>=4.18.2.1
+    hs-source-dirs:   app
+    default-language: Haskell2010
+
+executable day1p2
+    import:           warnings
+    main-is:          day01p2.hs
+    build-depends:    base ^>=4.18.2.1
+    hs-source-dirs:   app
+    default-language: Haskell2010
+
+executable day2
+    import:           warnings
+    main-is:          day02.hs
+    build-depends:    base ^>=4.18.2.1
+    hs-source-dirs:   app
+    default-language: Haskell2010
+
+executable day2p2
+    import:           warnings
+    main-is:          day02p2.hs
+    build-depends:    base ^>=4.18.2.1
+    hs-source-dirs:   app
+    default-language: Haskell2010
+
+executable day3
+    import:           warnings
+    main-is:          day03.hs
+    build-depends:    base ^>=4.18.2.1, regex-tdfa
+    hs-source-dirs:   app
+    default-language: Haskell2010
+
+executable day3p2
+    import:           warnings
+    main-is:          day03p2.hs
+    build-depends:    base ^>=4.18.2.1, regex-tdfa
+    hs-source-dirs:   app
+    default-language: Haskell2010
+
+executable day4
+    import:           warnings
+    main-is:          day04.hs
+    build-depends:    base ^>=4.18.2.1
+    hs-source-dirs:   app
+    default-language: Haskell2010
+
+executable day4p2
+    import:           warnings
+    main-is:          day04p2.hs
+    build-depends:    base ^>=4.18.2.1
+    hs-source-dirs:   app
+    default-language: Haskell2010
