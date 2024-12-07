@@ -24,9 +24,9 @@ parseUpdates = mapMaybe parseUpdate
 parse :: String -> ([(Int, Int)], [[Int]])
 parse s =
   let l = lines s
-   in let (rules, remaining) = parseRules l
-       in let updates = parseUpdates (dropWhile (== "") remaining)
-           in (rules, updates)
+      (rules, remaining) = parseRules l
+      updates = parseUpdates (dropWhile (== "") remaining)
+   in (rules, updates)
 
 ruleApplies :: (Int, Int) -> [Int] -> Bool
 ruleApplies _ [] = True
