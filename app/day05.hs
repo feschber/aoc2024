@@ -16,7 +16,7 @@ parseRules (x : xs) = case parseRule x of
   Nothing -> ([], x : xs)
 
 parseUpdate :: String -> Maybe [Int]
-parseUpdate = sequence . map readMaybe . splitOn ","
+parseUpdate = mapM readMaybe . splitOn ","
 
 parseUpdates :: [String] -> [[Int]]
 parseUpdates = mapMaybe parseUpdate
@@ -30,15 +30,18 @@ parse s =
 
 ruleApplies :: (Int, Int) -> [Int] -> Bool
 ruleApplies _ [] = True
-ruleApplies r@(a, b) (x : xs) = if a == x then True else if b == x then not (a `elem` xs) else ruleApplies r xs
+ruleApplies r@(a, b) (x : xs)
+  | a == x = True
+  | b == x = a `notElem` xs
+  | otherwise = ruleApplies r xs
 
 isConform :: [(Int, Int)] -> [Int] -> Bool
-isConform r u = all ((flip ruleApplies) u) r
+isConform r u = all (`ruleApplies` u) r
 
 middle :: [a] -> a
 middle [a] = a
 middle [a, _] = a
-middle l = middle ((reverse . tail . reverse . tail) l)
+middle l = (middle . init . tail) l
 
 main :: IO ()
 main = do
