@@ -1,5 +1,6 @@
 module Main where
 
+import Control.Applicative
 import Data.List.Split
 import Data.Maybe
 import Text.Read

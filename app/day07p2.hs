@@ -1,3 +1,4 @@
+import Control.Applicative
 import Data.List.Split
 import Data.Maybe
 import Data.Tuple
