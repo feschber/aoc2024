@@ -1,0 +1,13 @@
+**/*
+!.gitignore
+!.github/
+!app/
+!aoc2024.cabal
+!*.hs
+!input-*
+!test4
+!answer-*
+!example-*
+!shell.nix
+!LICENSE
+!CHANGELOG.md
